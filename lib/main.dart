@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Wenter&Fasshion',
       theme: ThemeData(
 
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: MyHomePage(),
     );
@@ -67,7 +67,7 @@ class Custom_Drawer extends StatelessWidget {
               // margin: EdgeInsets.zero,
               padding: EdgeInsets.zero,
               child: UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(color: Colors.blue[200]),
+                  decoration: BoxDecoration(color: Colors.green[200]),
                   accountName: Text('Irina Last'),
                   accountEmail: Text("WF@weatheranfasion.com"),
                   currentAccountPicture: new CircleAvatar(
