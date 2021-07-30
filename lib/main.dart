@@ -15,12 +15,12 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.green,
       ),
-      home: MyHomePage(),
+      home: WeatherFashionApp(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class WeatherFashionApp extends StatelessWidget {
 
 
 
@@ -28,8 +28,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
+
         title: Text('Weather&Fashion'),
       ),
 
@@ -41,11 +40,7 @@ class MyHomePage extends StatelessWidget {
 
       ),
       drawer: Custom_Drawer(),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      //), // This trailing comma makes auto-formatting nicer for build methods.
+
     );
   }
 }
