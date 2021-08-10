@@ -12,4 +12,14 @@ class DarkThemeProvider with ChangeNotifier {
     darkThemePreference.setDarkTheme(value);
     notifyListeners();
   }
+
+  bool updateTheme(bool value) {
+    bool returnModel = _darkTheme;
+
+    returnModel = value;
+    _darkTheme =  returnModel;
+    notifyListeners();
+
+    return returnModel;
+  }
 }
