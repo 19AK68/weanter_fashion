@@ -46,8 +46,16 @@ class _WeatherFashionAppState extends State<WeatherFashionApp> {
             return
                   MaterialApp(
                   title: 'Weather&Fashion',
+
                   theme: Styles.themeData(appModel.darkTheme, context),
-                  home: HomePage(),
+
+                  home: Container( decoration:BoxDecoration(
+                    image: DecorationImage(
+                      colorFilter: new ColorFilter.mode(Colors.blue.withOpacity(0.9), BlendMode.dstATop),
+                      image: AssetImage(!appModel.darkTheme?"assets/clear_day.png":"assets/clear_night2.jpg"),
+                    ),
+                  ),
+                      child: HomePage()),
             );
           },
 
