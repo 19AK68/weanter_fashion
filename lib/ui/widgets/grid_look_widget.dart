@@ -16,14 +16,38 @@ class GridLookWidget extends StatelessWidget {
             mainAxisSpacing: 20),
         itemCount: myProducts.length,
         itemBuilder: (BuildContext ctx, index) {
-          return Container(
-            alignment: Alignment.center,
-           // child: Text(myProducts[index]["name"]),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-            image: DecorationImage(image: AssetImage(myPhoto[index] ),
-            fit: BoxFit.contain,)),
+          return InkWell(
+            onTap: (){
+
+              Navigator.push<void>(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => GalleryPage(),
+                ),
+              );
+             
+
+            },
+            child: Container(
+              alignment: Alignment.center,
+             // child: Text(myProducts[index]["name"]),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+              image: DecorationImage(image: AssetImage(myPhoto[index] ),
+              fit: BoxFit.contain,)),
+            ),
           );
         });
+  }
+}
+
+class GalleryPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        color:Colors.red,
+      ),
+    );
   }
 }
