@@ -24,7 +24,9 @@ class WeatherFashionApp extends StatefulWidget {
 class _WeatherFashionAppState extends State<WeatherFashionApp> {
   DarkThemeProvider appModel = new DarkThemeProvider();
 
-  @override
+
+
+      @override
   void initState() {
     super.initState();
     _initAppTheme();
@@ -50,10 +52,12 @@ class _WeatherFashionAppState extends State<WeatherFashionApp> {
                   theme: Styles.themeData(appModel.darkTheme, context),
 
                   home: Container( decoration:BoxDecoration(
-                    image: DecorationImage(
-                      colorFilter: new ColorFilter.mode(Colors.blue.withOpacity(0.9), BlendMode.dstATop),
-                      image: AssetImage(!appModel.darkTheme?"assets/clear_day.png":"assets/clear_night2.jpg"),
-                    ),
+
+                    color: !appModel.darkTheme?Color(0xfff3fff5):Color(0xff3f3d56)
+                    // image: DecorationImage(
+                    //   colorFilter: new ColorFilter.mode(Colors.blue.withOpacity(0.9), BlendMode.dstATop),
+                    //   image: AssetImage(!appModel.darkTheme?"assets/clear_day.png":"assets/clear_night2.jpg"),
+                    // ),
                   ),
                       child: HomePage()),
             );
