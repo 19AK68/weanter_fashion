@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_fashion/model/dark_theme_provider.dart';
+import 'package:weather_fashion/resurce/style_app.dart';
 import 'package:weather_fashion/ui/widgets/custom_drawer.dart';
 import 'package:weather_fashion/ui/widgets/grid_look_widget.dart';
 import 'package:weather_fashion/ui/widgets/weather_widget.dart';
@@ -15,11 +16,13 @@ class _HomePageState extends State<HomePage> {
   int currentBottonIndex = 0;
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return SafeArea(
 
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-      backgroundColor: !appModel.darkTheme?Color(0xfff3fff5):Color(0xff3f3d56),
+      backgroundColor: !appModel.darkTheme?Styles.mainColorBackground:Color(0xff3f3d56),
         appBar: AppBar(
           title: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,12 +37,12 @@ class _HomePageState extends State<HomePage> {
        //   backgroundColor:Colors.transparent,
         ),
         bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: Color(0xfff3fff5),
+            backgroundColor: Styles.colorBottomBar,
 
 
           currentIndex: currentBottonIndex,
-          selectedItemColor: Color(0xff1bb55c),
-          unselectedItemColor: Color(0xff1bb55c).withOpacity(0.4),
+          selectedItemColor: Color(0xffffffff),
+          unselectedItemColor:Color(0xffCEF6FC).withOpacity(0.5),
           onTap: (index) => setState(() => currentBottonIndex = index),
           // print("------currentBottonIndex---- ${currentBottonIndex}")
           type: BottomNavigationBarType.fixed,
@@ -84,17 +87,22 @@ class _HomePageState extends State<HomePage> {
 
         ),
 
-        body:  Column(
+        body: Stack(
+          children: [
+            Column(
 
-          children:<Widget> [
+              children:<Widget> [
 
-            WeatherWidget(),
-           Expanded(  child: Padding(
-             padding: const EdgeInsets.all(8.0),
-             child: GridLookWidget(),
-           )),
+                WeatherWidget(),
+
+               Expanded(  child: Padding(
+                 padding:  EdgeInsets.only(top:height*0.05),
+                 child: GridLookWidget(),
+               )),
 
 
+              ],
+            ),
           ],
         ),
         drawer: CustomDrawer(),

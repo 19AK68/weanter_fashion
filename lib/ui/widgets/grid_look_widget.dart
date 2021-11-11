@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:weather_fashion/resurce/style_app.dart';
 
 
 class GridLookWidget extends StatelessWidget {
@@ -18,14 +20,16 @@ class GridLookWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 250,
-            childAspectRatio: 2 / 3,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20),
+    return StaggeredGridView.countBuilder(
+    staggeredTileBuilder:(index)  =>
+        StaggeredTile.count(1, 2),
+
+        mainAxisSpacing: 4.0,
+        crossAxisSpacing: 4.0,
+        crossAxisCount: 2,
+
         itemCount: myProducts.length,
-        itemBuilder: (BuildContext ctx, index) {
+        itemBuilder: ( ctx, index) {
           return InkWell(
             onTap: () {
               Navigator.push<void>(
@@ -36,53 +40,59 @@ class GridLookWidget extends StatelessWidget {
                 ),
               );
             },
-            child: Container(
+            child: Card(
+              child: Container(
+                  decoration: BoxDecoration(
+                     color: Styles.colorBottomBar  ,
+                      borderRadius: BorderRadius.circular(15), border:
+                      Border.all(color: Color(0xffd1d1d1))
+              ),
+              child: Column(
+                //crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    child: Container(height:240,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15), border:
-                    Border.all(color: Color(0xffd1d1d1))
-            ),
-            child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(height:240,
-              decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
-                  image: DecorationImage(image: AssetImage(myPhoto[index] ),
-                  fit: BoxFit.cover,)),
-                ),
-                    //child: Image.asset(myPhoto[index], fit: BoxFit.contain,)),
-                // Container(
-                // //  color: Colors.green[200],
-                // height: 220, alignment: Alignment.topLeft,
-                //  // child: Text(myProducts[index]["name"]),
-                //   decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(15),
-                //   image: DecorationImage(image: AssetImage(myPhoto[index] ),
-                //   fit: BoxFit.fitWidth,)),
-                // ),
-                Container(
-                  height: 20,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children:[
-                      IconButton(
-                        icon:   Icon(Icons.favorite_border,color: Colors.red,), onPressed: () {  }
-                        ,
-                      ),
-                      IconButton(
-                        icon:   Icon(Icons.share,color: Color(0xff262626)), onPressed: () {  }
-                        ,
-                      ),
-                    ],
-
-                 ),
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
+                      image: DecorationImage(image: AssetImage(myPhoto[index] ),
+                      fit: BoxFit.cover,)),
+                    ),
                   ),
+                      //child: Image.asset(myPhoto[index], fit: BoxFit.contain,)),
+                  // Container(
+                  // //  color: Colors.green[200],
+                  // height: 220, alignment: Alignment.topLeft,
+                  //  // child: Text(myProducts[index]["name"]),
+                  //   decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(15),
+                  //   image: DecorationImage(image: AssetImage(myPhoto[index] ),
+                  //   fit: BoxFit.fitWidth,)),
+                  // ),
+                  Container(
 
-                  //  color: Colors.red[100],
+                    height: 40,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children:[
+                        IconButton(
+                          icon:   Icon(Icons.favorite_border,color: Color(0xffCEF6FC), ), onPressed: () {  }
+                          ,
+                        ),
+                        IconButton(
+                          icon:   Icon(Icons.star_border,color:Color(0xffCEF6FC)), onPressed: () {  }
+                          ,
+                        ),
+                      ],
 
-              ],
-            ),
-          ),);
+                   ),
+                    ),
+
+                    //  color: Colors.red[100],
+
+                ],
+              ),
+          ),
+            ),);
         });
   }
 }

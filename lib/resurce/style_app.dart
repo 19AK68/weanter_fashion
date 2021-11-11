@@ -4,6 +4,13 @@ import 'package:flutter/material.dart';
 
 class Styles {
 
+  static Color gradientColorWeanter_1 = Color(0xff6EB5C0);
+  static Color gradientColorWeanter_2 = Color(0xff006C84);
+  static Color colorBottomBar = Color(0xff006C84);
+  static Color mainColorBackground = Color(0xffCEF6FC);
+
+
+
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
       primarySwatch: Colors.red,
