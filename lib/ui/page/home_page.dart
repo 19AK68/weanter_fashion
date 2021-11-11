@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
 
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-      backgroundColor: !appModel.darkTheme?Styles.mainColorBackground:Color(0xff3f3d56),
+      backgroundColor: !appModel.darkTheme?Styles.mainColorBackground.withOpacity(1):Color(0xff3f3d56),
         appBar: AppBar(
           title: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(
              // backgroundColor: Colors.transparent,
               icon: Icon(
-                Icons.share,
+                Icons.star_border,
 
               ),
               label: " ",
@@ -75,13 +75,10 @@ class _HomePageState extends State<HomePage> {
               label: "",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.call),
+              icon: Icon(Icons.settings),
               label: "Phone",
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shop),
-              label: " ",
-            ),
+            
           ],
         // backgroundColor:Colors.transparent
 
