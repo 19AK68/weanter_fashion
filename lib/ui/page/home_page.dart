@@ -13,7 +13,56 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   DarkThemeProvider appModel = new DarkThemeProvider();
 
-  int currentBottonIndex = 0;
+  var currentBottonIndex;
+ late  List<Widget>? screens;
+
+
+  @override
+  void initState(){
+
+    setState(() {});
+    super.initState();
+    currentBottonIndex = 0;
+
+    screens = <Widget>[
+      _bodyHomeWidget(context),
+     // HomePage(),
+      bodyWidgetFaforitPage(context),
+      bodyWidgetRPage(context),
+      // MealPlanPage(),
+      bodyWidgetPhonePage(context)
+      //ShoppingPage(),
+//      FavoritePage(),
+
+    ];
+
+    //  WidgetsBinding.instance.addPostFrameCallback((_) => _bloc.initState());
+
+
+  }
+
+  bodyWidgetFaforitPage(BuildContext context) {
+    return Container(color: Colors.red[100]);
+  }
+
+  bodyWidgetRPage(BuildContext context) {
+    return Container(color: Colors.green[100]);
+  }
+
+  bodyWidgetPhonePage(BuildContext context) {
+    return Container(color: Colors.blue[100]);
+  }
+
+  bodyWidgetLastPage(BuildContext context) {
+    return Container(color: Colors.yellow[100]);
+  }
+  @override
+  void dispose() {
+    //  _bloc.dispose();
+    //   WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -21,7 +70,9 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
 
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+       body: screens?[currentBottonIndex],
+
+        //resizeToAvoidBottomInset: false,
       backgroundColor: !appModel.darkTheme?Styles.mainColorBackground.withOpacity(1):Color(0xff3f3d56),
         appBar: AppBar(
           title: Row(
@@ -41,9 +92,11 @@ class _HomePageState extends State<HomePage> {
 
 
           currentIndex: currentBottonIndex,
+          onTap: (index) => setState(() => currentBottonIndex = index),
+
           selectedItemColor: Color(0xffffffff),
           unselectedItemColor:Color(0xffCEF6FC).withOpacity(0.5),
-          onTap: (index) => setState(() => currentBottonIndex = index),
+
           // print("------currentBottonIndex---- ${currentBottonIndex}")
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
@@ -84,27 +137,34 @@ class _HomePageState extends State<HomePage> {
 
         ),
 
-        body: Stack(
-          children: [
-            Column(
-
-              children:<Widget> [
-
-                WeatherWidget(),
-
-               Expanded(  child: Padding(
-                 padding:  EdgeInsets.only(top:height*0.05),
-                 child: GridLookWidget(),
-               )),
-
-
-              ],
-            ),
-          ],
-        ),
+        // body:
+        // _bodyHomeWidget(),
         drawer: CustomDrawer(),
 
       ),
     );
+  }
+
+ Widget _bodyHomeWidget(BuildContext context) {
+
+
+    return Stack(
+        children: [
+          Column(
+
+            children:<Widget> [
+
+              WeatherWidget(),
+
+             Expanded(  child: Padding(
+               padding:  EdgeInsets.only(top:20),
+               child: GridLookWidget(),
+             )),
+
+
+            ],
+          ),
+        ],
+      );
   }
 }
