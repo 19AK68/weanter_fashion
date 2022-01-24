@@ -5,6 +5,7 @@ import 'package:weather_fashion/model/dark_theme_provider.dart';
 import 'package:weather_fashion/resurce/style_app.dart';
 import 'package:weather_fashion/servise/shared_preference.dart';
 import 'package:weather_fashion/ui/page/home_page.dart';
+import 'package:weather_fashion/ui/page/home_screen.dart';
 import 'package:weather_fashion/ui/widgets/custom_drawer.dart';
 
 void main() {
@@ -52,14 +53,13 @@ class _WeatherFashionAppState extends State<WeatherFashionApp> {
                   theme: Styles.themeData(appModel.darkTheme, context),
 
                   home: Container( decoration:BoxDecoration(
-
-                    color: !appModel.darkTheme?Color(0xfff3fff5):Color(0xff3f3d56)
+                      color: !appModel.darkTheme?Styles.mainColorBackground:Colors.blue
                     // image: DecorationImage(
                     //   colorFilter: new ColorFilter.mode(Colors.blue.withOpacity(0.9), BlendMode.dstATop),
                     //   image: AssetImage(!appModel.darkTheme?"assets/clear_day.png":"assets/clear_night2.jpg"),
                     // ),
                   ),
-                      child: HomePage()),
+                      child:HomeScreen()),
             );
           },
 

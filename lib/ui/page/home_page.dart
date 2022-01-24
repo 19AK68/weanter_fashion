@@ -11,34 +11,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  DarkThemeProvider appModel = new DarkThemeProvider();
+ // DarkThemeProvider appModel = new DarkThemeProvider();
 
   var currentBottonIndex;
- late  List<Widget>? screens;
-
+  late List<Widget>? screens;
 
   @override
-  void initState(){
-
+  void initState() {
     setState(() {});
     super.initState();
     currentBottonIndex = 0;
 
     screens = <Widget>[
       _bodyHomeWidget(context),
-     // HomePage(),
+      // HomePage(),
       bodyWidgetFaforitPage(context),
       bodyWidgetRPage(context),
       // MealPlanPage(),
       bodyWidgetPhonePage(context)
       //ShoppingPage(),
 //      FavoritePage(),
-
     ];
 
     //  WidgetsBinding.instance.addPostFrameCallback((_) => _bloc.initState());
-
-
   }
 
   bodyWidgetFaforitPage(BuildContext context) {
@@ -46,7 +41,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   bodyWidgetRPage(BuildContext context) {
-    return Container(color: Colors.green[100]);
+    return Container(
+
+        color: Colors.red,
+        // decoration: BoxDecoration(
+        // gradient: LinearGradient(
+        //     colors: [
+        //       Color(0xff2767c7),
+        //       Color(0xff276444),
+        //
+        //     ]))
+    );
   }
 
   bodyWidgetPhonePage(BuildContext context) {
@@ -56,6 +61,7 @@ class _HomePageState extends State<HomePage> {
   bodyWidgetLastPage(BuildContext context) {
     return Container(color: Colors.yellow[100]);
   }
+
   @override
   void dispose() {
     //  _bloc.dispose();
@@ -68,58 +74,65 @@ class _HomePageState extends State<HomePage> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
-
       child: Scaffold(
-       body: screens?[currentBottonIndex],
+        body:
+        Container(
+
+          child: screens?[currentBottonIndex],
+
+        ),
 
         //resizeToAvoidBottomInset: false,
-      backgroundColor: !appModel.darkTheme?Styles.mainColorBackground.withOpacity(1):Color(0xff3f3d56),
+        // backgroundColor: !appModel.darkTheme
+        //     ? Styles.mainColorBackground.withOpacity(1)
+        //     : Color(0xff3f3d56),
         appBar: AppBar(
           title: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text("Kyiv ", style:  Theme.of(context).textTheme.subtitle1,),
-              Text(" 30 °C", style:  Theme.of(context).textTheme.subtitle1,),
+              Text(
+                "Kyiv ",
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+              Text(
+                " -12 °C",
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
 
               // Text('Weather&Fashion', ),
             ],
           ),
-       //   backgroundColor:Colors.transparent,
+          //   backgroundColor:Colors.transparent,
         ),
         bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: Styles.colorBottomBar,
-
+          backgroundColor: Styles.colorBottomBar,
 
           currentIndex: currentBottonIndex,
           onTap: (index) => setState(() => currentBottonIndex = index),
 
           selectedItemColor: Color(0xffffffff),
-          unselectedItemColor:Color(0xffCEF6FC).withOpacity(0.5),
+          unselectedItemColor: Color(0xffCEF6FC).withOpacity(0.5),
 
           // print("------currentBottonIndex---- ${currentBottonIndex}")
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
           showUnselectedLabels: false,
 
-          iconSize: 32  ,
+          iconSize: 32,
 
           items: <BottomNavigationBarItem>[
-
-
             BottomNavigationBarItem(
-             // backgroundColor: Colors.transparent,
+              // backgroundColor: Colors.transparent,
               icon: Icon(
                 Icons.home,
-
               ),
               label: "",
             ),
             BottomNavigationBarItem(
-             // backgroundColor: Colors.transparent,
+              // backgroundColor: Colors.transparent,
               icon: Icon(
                 Icons.star_border,
-
               ),
               label: " ",
             ),
@@ -131,40 +144,27 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.settings),
               label: "Phone",
             ),
-            
           ],
-        // backgroundColor:Colors.transparent
-
+          // backgroundColor:Colors.transparent
         ),
 
         // body:
         // _bodyHomeWidget(),
         drawer: CustomDrawer(),
-
       ),
     );
   }
 
- Widget _bodyHomeWidget(BuildContext context) {
-
-
+  Widget _bodyHomeWidget(BuildContext context) {
     return Stack(
-        children: [
-          Column(
-
-            children:<Widget> [
-
-              WeatherWidget(),
-
-             Expanded(  child: Padding(
-               padding:  EdgeInsets.only(top:20),
-               child: GridLookWidget(),
-             )),
-
-
-            ],
-          ),
-        ],
-      );
+      children: [
+        Column(
+          children: <Widget>[
+            WeatherWidget(),
+            GridLookWidget(),
+          ],
+        ),
+      ],
+    );
   }
 }

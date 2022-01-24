@@ -1,14 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:photo_view/photo_view.dart';
-import 'package:weather_fashion/resurce/style_app.dart';
-
+import 'package:weather_fashion/ui/page/gallery_page.dart';
 
 class GridLookWidget extends StatelessWidget {
   final List<Map> myProducts =
-  List.generate(6, (index) => {"id": index, "name": "Loke: $index"})
-      .toList();
-  final List<String> myPhoto = [
+      List.generate(6, (index) => {"id": index, "name": "Loke: $index"})
+          .toList();
+  final List<String>? myPhoto = [
     "assets/9291.png",
     "assets/9289.png",
     "assets/9292.png",
@@ -17,104 +17,129 @@ class GridLookWidget extends StatelessWidget {
     "assets/9313.jpg"
   ];
 
-
   @override
   Widget build(BuildContext context) {
-    return StaggeredGridView.countBuilder(
-    staggeredTileBuilder:(index)  =>
-        StaggeredTile.count(1, 2),
+    var size = MediaQuery.of(context).size;
+   // double width = size.width * 0.8 / 2;
+   // double height = width + 30;
+  //  print("width:${width} -----height:${height} ");
 
-        mainAxisSpacing: 4.0,
-        crossAxisSpacing: 4.0,
-        crossAxisCount: 2,
+    return GridView.count(
+      addAutomaticKeepAlives: false,
+     // childAspectRatio: width / height,
+      scrollDirection: Axis.vertical,
+      crossAxisCount: 2,
+      physics: BouncingScrollPhysics(),
+      children: myPhoto!.map((value) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: _itemLook(context, value, ),
+        );
+      }).toList(),
+    );
+    // StaggeredGridView.countBuilder(
+    //   staggeredTileBuilder: (index) => StaggeredTile.count(1, 2),
+    //   crossAxisCount: 2,
+    //   itemCount: myProducts.length,
+    //   itemBuilder: (ctx, index) {
+    //     return _itemLook(context, index, width, height);
+    //   });
+  }
 
-        itemCount: myProducts.length,
-        itemBuilder: ( ctx, index) {
-          return InkWell(
-            onTap: () {
-              Navigator.push<void>(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) =>
-                      GalleryPage(photo: myPhoto[index],),
-                ),
-              );
-            },
-            child: Card(
-              child: Container(
-                  decoration: BoxDecoration(
-                     color: Styles.colorBottomBar  ,
-                      borderRadius: BorderRadius.circular(15), border:
-                      Border.all(color: Color(0xffd1d1d1))
+  Widget _itemLook(BuildContext context, String img, ) {
+    return InkWell(
+        onTap: () {
+          Navigator.push<void>(
+            context,
+            MaterialPageRoute<void>(
+              builder: (BuildContext context) => GalleryPage(
+                photo: img, //myPhoto![index],
               ),
-              child: Column(
-                //crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: Container(height:240,
-                decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
-                      image: DecorationImage(image: AssetImage(myPhoto[index] ),
-                      fit: BoxFit.cover,)),
+            ),
+          );
+        },
+        child: Stack(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(4),
+            child: Stack(
+              children: [
+                //   elevation: 1,
+                // shape: RoundedRectangleBorder(
+                //   side: new BorderSide(color: Color(0xff807A7A), width: 5.0),
+                //   borderRadius: BorderRadius.circular(25),
+                // ),
+                Container(
+                  height: 160,
+                    width: 170,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.blue.withOpacity(0.1),
+                          style: BorderStyle.solid,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(15),
+                        //      color: Colors.black.withOpacity(0.5),
+                        image: new DecorationImage(
+                            image: ExactAssetImage(img), fit: BoxFit.fill ))),
+
+                Positioned.fill(
+                    child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    margin: EdgeInsets.only(top: Platform.isAndroid ? 0 : 24),
+                    height: 56,
+                    padding: EdgeInsets.only(left: 8, right: 8),
+                    child: Row(
+                      children: [
+                        favoriteButton(context, false),
+                        Expanded(child: Container()),
+                      ],
                     ),
                   ),
-                      //child: Image.asset(myPhoto[index], fit: BoxFit.contain,)),
-                  // Container(
-                  // //  color: Colors.green[200],
-                  // height: 220, alignment: Alignment.topLeft,
-                  //  // child: Text(myProducts[index]["name"]),
-                  //   decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(15),
-                  //   image: DecorationImage(image: AssetImage(myPhoto[index] ),
-                  //   fit: BoxFit.fitWidth,)),
-                  // ),
-                  Container(
-
-                    height: 40,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children:[
-                        IconButton(
-                          icon:   Icon(Icons.favorite_border,color: Color(0xffCEF6FC), ), onPressed: () {  }
-                          ,
-                        ),
-                        IconButton(
-                          icon:   Icon(Icons.star_border,color:Color(0xffCEF6FC)), onPressed: () {  }
-                          ,
-                        ),
-                      ],
-
-                   ),
-                    ),
-
-                    //  color: Colors.red[100],
-
-                ],
-              ),
+                )),
+                //     Stack(
+                //       children: [
+                //
+                //         // Positioned.fill(
+                //         //     child: Align(
+                //         //   alignment: Alignment.topRight,
+                //         //   child: Padding(
+                //         //     padding: const EdgeInsets.all(8.0),
+                //         //     child: Text(
+                //         //       "S",
+                //         //       style: TextStyle(
+                //         //           fontSize: 28,
+                //         //           color: Colors.red,
+                //         //           fontWeight: FontWeight.bold),
+                //         //     ),
+                //         //   ),
+                //         //   // child: AddToPlanWidget(model, addToPlan: (recipeModel){
+                //         //   //   AddToPlanDialog.show(context, recipeModel);
+                //         //   // }),
+                //         // )),
+                //
+                //       ],
+                //     ),
+              ],
+            ),
           ),
-            ),);
-        });
+        ]));
   }
-}
 
-class GalleryPage extends StatelessWidget {
-  final String photo;
-
-  GalleryPage({required this.photo});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-       // color: Colors.green,
-          child: PhotoView(
-            backgroundDecoration: BoxDecoration(color: Colors.green[100]),
-
-            maxScale: PhotoViewComputedScale.contained * 2,
-            minScale: PhotoViewComputedScale.contained * 0.8,
-
-            imageProvider: AssetImage(photo),)
-      ),
+  Widget favoriteButton(BuildContext context, bool isFavorits) {
+    return IconButton(
+      icon: Container(
+          decoration: BoxDecoration(
+              color: Colors.blue, borderRadius: BorderRadius.circular(45)),
+          child: Center(
+              child: Icon(
+            isFavorits ? Icons.favorite : Icons.favorite_border,
+            color: Colors.white,
+          ))),
+      onPressed: () {
+        isFavorits = !isFavorits;
+        //     _bloc.clickOnFavorite();
+      },
     );
   }
 }

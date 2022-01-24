@@ -7,7 +7,8 @@ class Styles {
   static Color gradientColorWeanter_1 = Color(0xff6EB5C0);
   static Color gradientColorWeanter_2 = Color(0xff006C84);
   static Color colorBottomBar = Color(0xff006C84);
-  static Color mainColorBackground = Color(0xffCEF6FC);
+  static Color mainColorBackground = Colors.blue.shade100  ;
+  static Color colorTitle = Colors.white;
 
 
 
