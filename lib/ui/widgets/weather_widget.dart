@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_fashion/data/weanter/weanter_entity.dart';
+import 'package:weather_fashion/data/weanter/weanter_entity_impl.dart';
+import 'package:weather_fashion/data/weanter/weather_api/weather_api_client.dart';
+import 'package:weather_fashion/model/weather/basic_model_weather.dart';
 import 'package:weather_fashion/resurce/style_app.dart';
 import 'package:weather_fashion/ui/weanter_screen.dart';
 
@@ -10,6 +14,20 @@ class WeatherWidget extends StatefulWidget {
 
 class _WeatherWidgetState extends State<WeatherWidget>
     with TickerProviderStateMixin {
+
+  WeatherApiClient client = WeatherApiClient();
+  BasicWeatherModel? data = new BasicWeatherModel();
+
+  Future<void> getData() async{
+    data = client.getCurrentWeather("Kyiv") as BasicWeatherModel;
+    print("------${data!.name}");
+  }
+  // WeatherEntityImp weatherEntity = WeatherEntityImp();
+  // @override
+  // void initState(){
+  //   super.initState();
+  //   weatherEntity.getCurrentWeather("Kyiv");
+  // }
   @override
   Widget build(BuildContext context) {
     TabController _controller = TabController(length: 5, vsync: this);

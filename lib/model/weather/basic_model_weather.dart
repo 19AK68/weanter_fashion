@@ -86,6 +86,8 @@ class BasicWeatherModel {
     data['cod'] = this.cod;
     return data;
   }
+
+
 }
 
 
