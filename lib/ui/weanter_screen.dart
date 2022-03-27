@@ -55,13 +55,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 color: Styles.mainColorBackground,
                 child: Column(
 
-                  mainAxisAlignment: MainAxisAlignment.center,
+                //  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Center(
+                    Padding(
+                      padding: EdgeInsets.only(top: 32.0),
                       child: Container(
 
                           child: Text(
-                            "${_model!.name}",style: TextStyle(fontSize: 40)
+                            "${_model!.name}",style: TextStyle(fontSize: 28)
 
                           )),
                     ),
@@ -69,11 +70,84 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     Center(
                       child: Container(
                           color: Styles.mainColorBackground,
-                          child: Text("${_model!.main!.temp.toString()}\u00B0 C",style: TextStyle(fontSize: 40), ),
+                          child: Text("${(_model!.main!.temp!).round().toString()}\u00B0",style: TextStyle(fontSize: 36), ),
 
 
                           ),
+
                     ),
+                    SizedBox(height: 32,),
+                    Padding(
+                      padding:EdgeInsets.symmetric(horizontal: 32),
+                      child: Container(
+
+                        height: 120,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color:Styles.mainColorBackground,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10)
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 3,
+                              offset: Offset(0, 1), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                          child: Padding(
+                            padding:  EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("title"),
+                                Divider(),
+                                Text("text1")
+                              ],
+                            ),
+                          )
+                      ),
+                    ),
+                    SizedBox(height: 16,),
+                    Padding(
+                      padding:EdgeInsets.symmetric(horizontal: 32),
+                      child:Container(
+
+
+                        height: 360,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color:Styles.mainColorBackground,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10)
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 3,
+                              offset: Offset(0, 1), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("title"),
+                            Divider(),
+                            Text("text1")
+                          ],
+                        )
+                      ),
+                    )
 
                   ],
                 ),

@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:weather_fashion/model/weather/basic_model_weather.dart';
 
 class WeatherApiClient {
-  var myCity = "Georgia";//"Kyiv";
+  var myCity = "Kyiv";//"Poltava";
 
   Future<BasicWeatherModel>? getCurrentWeather(String? location) async {
     var enfpoins = Uri.parse(
