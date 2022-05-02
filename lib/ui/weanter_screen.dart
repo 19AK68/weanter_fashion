@@ -15,11 +15,20 @@ class _WeatherScreenState extends State<WeatherScreen> {
   WeatherApiClient client = WeatherApiClient();
   BasicWeatherModel? _model;
   var data;
+  late Future dataWeatherModel;
 
-  Future geData() async {
-    return client.getCurrentWeather(client.myCity)!.then((data) {
+
+  @override
+  void initState() {
+    super.initState();
+    dataWeatherModel = getData();
+  }
+
+  Future getData() async {
+    var _data = client.getCurrentWeather(client.myCity)!.then((data) {
       _model = data;
     });
+    return  _data;
   }
 
   @override
@@ -47,120 +56,125 @@ class _WeatherScreenState extends State<WeatherScreen> {
             ],
           ),
         ),
-        body: FutureBuilder(
-          future: geData(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Container(
-                color: Styles.mainColorBackground,
-                child: Column(
-
-                //  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 32.0),
-                      child: Container(
-
-                          child: Text(
-                            "${_model!.name}",style: TextStyle(fontSize: 28)
-
-                          )),
-                    ),
-                //    Icon(IconData(int.parse("0xe${_model!.weather!.last!.icon!}"))),
-                    Center(
-                      child: Container(
-                          color: Styles.mainColorBackground,
-                          child: Text("${(_model!.main!.temp!).round().toString()}\u00B0",style: TextStyle(fontSize: 36), ),
-
-
+        body:SingleChildScrollView(
+        //  physics: NeverScrollableScrollPhysics(),
+        //  shrinkWrap: true,
+          child: Column(
+            children: [
+              FutureBuilder(
+                future: dataWeatherModel, //getData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return
+                      Container(
+                      color: Styles.mainColorBackground,
+                      child: Column(
+                        //  mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 32.0),
+                            child:
+                                Container(child: Text("${_model!.name}", style: TextStyle(fontSize: 28))),
                           ),
-
-                    ),
-                    SizedBox(height: 32,),
-                    Padding(
-                      padding:EdgeInsets.symmetric(horizontal: 32),
-                      child: Container(
-
-                        height: 120,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(1),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10)
+                          //    Icon(IconData(int.parse("0xe${_model!.weather!.last!.icon!}"))),
+                          Center(
+                            child: Container(
+                              color: Styles.mainColorBackground,
+                              child: Text(
+                                "${(_model!.main!.temp!).round().toString()}\u00B0",
+                                style: TextStyle(fontSize: 36),
+                              ),
+                            ),
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.2),
-                              spreadRadius: 2,
-                              blurRadius: 3,
-                              offset: Offset(0, 1), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                          child: Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("title"),
-                                Divider(color: Styles.mainColorBackground,),
-                                Text("text1")
-                              ],
-                            ),
+                          SizedBox(
+                            height: 32,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 32),
+                            child: Container(
+                                height: 120,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.red[100],//Colors.white.withOpacity(1),
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 2,
+                                      blurRadius: 3,
+                                      offset: Offset(0, 1), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("title"),
+                                      Divider(
+                                        color: Styles.mainColorBackground,
+                                      ),
+                                      Text("text1")
+                                    ],
+                                  ),
+                                )),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 32),
+                            child: Container(
+                                height: 360,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(1),
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 2,
+                                      blurRadius: 3,
+                                      offset: Offset(0, 1), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("title"),
+                                    Divider(
+                                      color: Styles.mainColorBackground,
+                                    ),
+                                    Text("text1")
+                                  ],
+                                )),
                           )
+                        ],
                       ),
-                    ),
-                    SizedBox(height: 16,),
-                    Padding(
-                      padding:EdgeInsets.symmetric(horizontal: 32),
-                      child:Container(
-
-
-                        height: 360,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(1),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10)
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.2),
-                              spreadRadius: 2,
-                              blurRadius: 3,
-                              offset: Offset(0, 1), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("title"),
-                            Divider(color: Styles.mainColorBackground,),
-                            Text("text1")
-                          ],
-                        )
-                      ),
-                    )
-
-                  ],
-                ),
-              );
-            } else if (snapshot.connectionState == ConnectionState.waiting) {
-              Future.delayed( const Duration(seconds: 10),);
-              return (Center(
-                child: 
-                Container(color:Colors.white,child: CircularProgressIndicator()),
-              ));
-            }
-            return Container();
-          },
+                    );
+                  } else if (snapshot.connectionState == ConnectionState.waiting) {
+                    Future.delayed(
+                      const Duration(seconds: 10),
+                    );
+                    return (Center(
+                      child: Container(color: Colors.white, child: CircularProgressIndicator()),
+                    ));
+                  }
+                  return Container();
+                },
+              ),
+            ],
+          ),
         ));
   }
 }
