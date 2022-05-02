@@ -173,8 +173,8 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.only(top: 150),
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(40),
-              topLeft: Radius.circular(40),
+              topRight: Radius.circular(15),
+              topLeft: Radius.circular(15),
             ),
             child: Container(
               height: double.infinity,
@@ -196,11 +196,18 @@ class _HomeScreenState extends State<HomeScreen> {
                crossAxisAlignment: CrossAxisAlignment.start,
               //  mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                 Expanded(
-                   child: Text(
-                     "Clothes for the day",
-                     style: TextStyle(color: Colors.black, fontSize: 20),
-                   ),
+                 Row(
+                   crossAxisAlignment: CrossAxisAlignment.center,
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   children: [
+                     Padding(
+                       padding: const EdgeInsets.symmetric(vertical: 16),
+                       child: Text(
+                         "Clothes for the day",
+                         style: TextStyle(color: Colors.black, fontSize: 20),
+                       ),
+                     ),
+                   ],
                  ),
 
 

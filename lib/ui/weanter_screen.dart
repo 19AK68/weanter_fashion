@@ -84,7 +84,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         height: 120,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color:Styles.mainColorBackground,
+                          color: Colors.white.withOpacity(1),
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10),
@@ -106,7 +106,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("title"),
-                                Divider(),
+                                Divider(color: Styles.mainColorBackground,),
                                 Text("text1")
                               ],
                             ),
@@ -122,7 +122,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         height: 360,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color:Styles.mainColorBackground,
+                          color: Colors.white.withOpacity(1),
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10),
@@ -142,7 +142,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("title"),
-                            Divider(),
+                            Divider(color: Styles.mainColorBackground,),
                             Text("text1")
                           ],
                         )
